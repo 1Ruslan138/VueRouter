@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Спортивный магазин</title>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/">Главная</router-link>
+        <router-link to="/pit">Спортивное питание</router-link>
+        <router-view></router-view>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://unpkg.com/vue-router@3"></script>
+    <script>
+        const Home = { template: '<div><h3>Добро пожаловать в спортивный магазин!</h3></div> ' }
+        const Pit = {
+            template: `
+        <div>
+          <h2>Спорт питание</h2>
+          <ul>
+            <li v-for="pit in pit" :key="pit.id">
+               <div>
+                <img :src="pit.img" style="width: 100px; height: auto;">
+                <span>{{pit.name}} - {{ pit.price }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      `,
+            data() {
+                return {
+                    pit: [
+                        { id: 1, name: "Протеин", price: "3000руб.", img: "https://main-cdn.sbermegamarket.ru/hlr-system/1517622/100023691319b0.jpg"},
+                        { id: 2, name: "Креатин", price: "2700руб.", img: "https://smolensk.2scoop.ru/upload/iblock/eb2/eb2b523d88e43835a8101e2fbfc97d92.jpg"},
+                        { id: 3, name: "Гейнер", price: "3000руб.", img: "https://vsudu-sport.ru/wp-content/uploads/2018/11/gejnery.jpg"},
+                        { id: 4, name: "Треноболон", price: "4000руб.", img: "https://sun1-56.userapi.com/impg/QoJtHDrp8qPs3Gtr6PjuID9LCJ0S-tRd3fxhoQ/4kplq-T1Q5Y.jpg?size=768x772&quality=95&sign=4d6c01f5c36068e9dcbbb7bd2b411a5f&c_uniq_tag=AuyJ8BYfzL-HEFloTT69I7VH2RmfF8c1CrBDSY40tC8&type=album"}
+                    ]
+                }
+            }
+        }
+
+        const routes = [
+            { path: '/', component: Home },
+            { path: '/pit', component: Pit }
+        ]
+
+        const router = new VueRouter({
+            routes
+        })
+
+        const app = new Vue({
+            router
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>
